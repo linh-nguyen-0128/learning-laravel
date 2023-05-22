@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Domain\Services\IPostService;
+use App\Domain\Services\PostService;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -11,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(IPostService::class, PostService::class);
     }
 
     /**

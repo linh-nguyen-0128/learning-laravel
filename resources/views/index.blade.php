@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        span {
+            font-weight: normal;
+        }
+    </style>
 </head>
 <body>
     @foreach ($posts as $item)
-        <h1>Title: {{ $item->title }}</h1>
-        <h1>Content: {{ $item->content }}</h1>
+        <h4>Title: <span>{{ $item->title }}</span></h4>
+        <h4>Content: <span>{{ $item->content }}</span></h4>
     @endforeach
 </body>
 </html>
