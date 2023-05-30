@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return response()->json([
             'message' => 'success',
             'data' => []
         ]);
     }
 
-    public function show() {
+    public function show()
+    {
         return response()->json([
             'message' => 'success',
             "data" => "detail category"
         ]);
     }
-
-
 }

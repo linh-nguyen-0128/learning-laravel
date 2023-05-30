@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +16,14 @@ use App\Http\Controllers\PostController;
 */
 
 Route::get('/', [PostController::class, 'index'])->name('home');
+Route::get('/login', function () {
+    return view('login');
+});
 
 Route::get('/home', [UserController::class, 'index'])->name('user');
-// Route::get('/products/{id}', [UserController::class, 'show']);
+Route::get('/products/{id}', [UserController::class, 'show']);
 Route::get('/posts/create', function () {
     return view('create');
 })->name('post.create');
+
+Route::get('/posts/{id}', [PostController::class, 'edit'])->name('post.edit');

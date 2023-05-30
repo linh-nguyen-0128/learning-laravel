@@ -4,13 +4,24 @@ namespace App\Domain\Repositories;
 use App\Domain\Entities\Post as PostEntity;
 use App\Models\Post;
 use Exception;
-
+use Illuminate\Http\Request;
 interface IPostRepository {
+    /**
+     * @param int $postId
+     * @return PostEntity
+     */
+    public function fetchPostById (int $postId): PostEntity;
+
     /**
      * @param int $postId
      * @return void
      */
-    public function fetchPostById (int $postId): ?PostEntity;
+    public function deletePost(int $postId): void;
+
+    /**
+     * @param Request $request
+     */
+    public function updatePost(Request $request);
 }
 
 class PostRepository implements IPostRepository {
@@ -24,7 +35,7 @@ class PostRepository implements IPostRepository {
     /**
      * @param int $postId
      */
-    public function fetchPostById (int $postId): ?PostEntity {
+    public function fetchPostById (int $postId): PostEntity {
         $result = $this->post->where('posts.id', $postId);
         $post = $result->select(
             'posts.hash_id',
@@ -51,5 +62,12 @@ class PostRepository implements IPostRepository {
         }
         $post->delete();
     }
+
+    public function updatePost(Request $request)
+    {
+        $result = $this->post->where('posts.id', $request->id)->first();
+        $result->title = $request->title;
+        $result->content = $request->content;
+        $result->save();
+    }
 }
-?>

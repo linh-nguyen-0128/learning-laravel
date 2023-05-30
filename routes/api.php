@@ -12,9 +12,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/categories', [CategoryController::class, 'index']);
+Route::post('/login', [UserController::class, 'login'])->name('auth.login');
 
-Route::post('/login', [UserController::class, 'login']);
-Route::post('/posts', [PostController::class, 'store'])->name('post.store');
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{id}', [PostController::class, 'show'])->where('id', '[0-9]+');
-Route::delete('/posts/{id}', [PostController::class, 'destroy'])->where('id', '[0-9]+');
+Route::prefix('/posts')->name('post.')->group(function () {
+    Route::post('/', [PostController::class, 'store'])->name('store');
+    Route::get('/', [PostController::class, 'index'])->name('index');
+    Route::get('/{id}', [PostController::class, 'show'])->where('id', '[0-9]+')->name('show');
+    Route::delete('/{id}', [PostController::class, 'destroy'])->where('id', '[0-9]+')->name('destroy');
+    Route::put('/{id}', [PostController::class, 'update'])->where('id', '[0-9]+')->name('update');
+});

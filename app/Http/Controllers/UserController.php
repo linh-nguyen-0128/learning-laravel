@@ -8,11 +8,13 @@ use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         return view('index');
     }
 
-    public function show(string $id) {
+    public function show(string $id)
+    {
         return response()->json([
             'id' => $id,
             'name' => 'Linh',
@@ -24,8 +26,11 @@ class UserController extends Controller
      * @param Request $request
      * @return JsonResponse
      */
-    public function login(Request $request): JsonResponse {
-        print_r($request->all());
+    public function login(Request $request): JsonResponse
+    {
+        $email = $request->email;
+        $password = $request->password;
+        dd($email, $password);
         return response()->json([
             'name' => 'Linh',
             'age' => '22'
